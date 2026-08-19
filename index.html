@@ -1,0 +1,1777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TSBGMI Admin</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,sans-serif;
+}
+
+body{
+  background:#070a10;
+  color:#fff;
+  min-height:100vh;
+  padding:18px;
+}
+
+.container{
+  max-width:900px;
+  margin:auto;
+}
+
+.login{
+  max-width:400px;
+  margin:80px auto;
+  background:#111722;
+  border:1px solid #293548;
+  border-radius:18px;
+  padding:25px;
+}
+
+.logo{
+  text-align:center;
+  color:#00eaff;
+  font-size:32px;
+  font-weight:900;
+  margin-bottom:8px;
+}
+
+.login h2{
+  text-align:center;
+  margin-bottom:20px;
+}
+
+input{
+  width:100%;
+  padding:13px;
+  margin-top:10px;
+  border-radius:10px;
+  border:1px solid #303b4d;
+  background:#090e16;
+  color:#fff;
+  outline:none;
+}
+
+input:focus{
+  border-color:#00eaff;
+}
+
+.login button{
+  width:100%;
+  padding:14px;
+  margin-top:18px;
+  border:0;
+  border-radius:10px;
+  background:#00d9ef;
+  color:#061016;
+  font-weight:bold;
+  font-size:16px;
+  cursor:pointer;
+}
+
+.error{
+  color:#ff8585;
+  text-align:center;
+  margin-top:12px;
+}
+
+.dashboard{
+  display:none;
+}
+
+.header{
+  text-align:center;
+  padding:15px 0 25px;
+}
+
+.header p{
+  color:#9ca3af;
+  margin-top:5px;
+}
+
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:18px;
+}
+
+.logout{
+  background:#252d3a;
+  color:white;
+  border:1px solid #3b4658;
+  border-radius:9px;
+  padding:10px 14px;
+  cursor:pointer;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-bottom:18px;
+}
+
+.stat{
+  background:#111722;
+  border:1px solid #293548;
+  border-radius:14px;
+  padding:16px;
+  text-align:center;
+}
+
+.stat strong{
+  display:block;
+  font-size:27px;
+  color:#00eaff;
+}
+
+.stat span{
+  color:#9ca3af;
+  font-size:13px;
+}
+
+.registration{
+  background:#111722;
+  border:1px solid #293548;
+  border-radius:16px;
+  padding:17px;
+  margin-bottom:15px;
+}
+
+.regHeader{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:14px;
+  gap:10px;
+}
+
+.badge{
+  background:#00d9ef;
+  color:#061016;
+  border-radius:20px;
+  padding:6px 10px;
+  font-size:12px;
+  font-weight:bold;
+}
+
+.teamName{
+  color:#00eaff;
+  font-size:20px;
+  font-weight:bold;
+}
+
+.detail{
+  background:#0b1018;
+  border:1px solid #253144;
+  border-radius:10px;
+  padding:12px;
+  margin-top:10px;
+}
+
+.detail b{
+  color:#00eaff;
+}
+
+.player{
+  background:#0b1018;
+  border:1px solid #253144;
+  border-radius:10px;
+  padding:13px;
+  margin-top:10px;
+}
+
+.playerTitle{
+  color:#00eaff;
+  font-weight:bold;
+  margin-bottom:9px;
+}
+
+.confirmation{
+  margin-top:14px;
+  padding:14px;
+  background:#07151b;
+  border:1px solid #00eaff;
+  border-radius:12px;
+}
+
+.confirmation-title{
+  color:#00eaff;
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+.pending{
+  color:#ffd966;
+  font-weight:bold;
+}
+
+.approved{
+  color:#7fffd4;
+  font-weight:bold;
+}
+
+.rejected{
+  color:#ff7777;
+  font-weight:bold;
+}
+
+.approve{
+  width:100%;
+  margin-top:14px;
+  padding:13px;
+  border:0;
+  border-radius:9px;
+  background:#16a36a;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.reject{
+  width:100%;
+  margin-top:10px;
+  padding:13px;
+  border:0;
+  border-radius:9px;
+  background:#d62828;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.whatsapp{
+  width:100%;
+  margin-top:10px;
+  padding:13px;
+  border:0;
+  border-radius:9px;
+  background:#25d366;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.rejectWhatsapp{
+  width:100%;
+  margin-top:10px;
+  padding:13px;
+  border:0;
+  border-radius:9px;
+  background:#128c7e;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.delete{
+  width:100%;
+  margin-top:10px;
+  padding:12px;
+  border:0;
+  border-radius:9px;
+  background:#a91f1f;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.empty{
+  text-align:center;
+  color:#9ca3af;
+  padding:40px 10px;
+}
+
+@media(max-width:600px){
+  .stats{
+    grid-template-columns:1fr 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- LOGIN -->
+
+<div id="loginBox" class="login">
+
+  <div class="logo">
+    TSBGMI
+  </div>
+
+  <h2>ADMIN LOGIN</h2>
+
+  <input
+    id="email"
+    type="email"
+    placeholder="Admin email"
+  >
+
+  <input
+    id="password"
+    type="password"
+    placeholder="Admin password"
+  >
+
+  <button onclick="login()">
+    LOGIN
+  </button>
+
+  <div id="loginError" class="error"></div>
+
+</div>
+
+
+<!-- DASHBOARD -->
+
+<div id="dashboard" class="dashboard">
+
+  <div class="header">
+
+    <div class="logo">
+      TSBGMI ADMIN
+    </div>
+
+    <p>
+      Registration Dashboard
+    </p>
+
+  </div>
+
+
+  <div class="topbar">
+
+    <h2>
+      Registrations
+    </h2>
+
+    <button
+      class="logout"
+      onclick="logout()">
+      Logout
+    </button>
+
+  </div>
+
+
+  <!-- STATS -->
+
+  <div class="stats">
+
+    <div class="stat">
+      <strong id="total">0</strong>
+      <span>Total</span>
+    </div>
+
+    <div class="stat">
+      <strong id="teams">0</strong>
+      <span>Teams</span>
+    </div>
+
+    <div class="stat">
+      <strong id="solos">0</strong>
+      <span>Solo</span>
+    </div>
+
+  </div>
+
+
+  <!-- SEARCH -->
+
+  <input
+    id="search"
+    type="text"
+    placeholder="🔎 Search team, player, UID, IGN or phone..."
+    oninput="render()"
+  >
+
+
+  <div id="list">
+
+    <div class="empty">
+      Loading...
+    </div>
+
+  </div>
+
+</div>
+
+</div>
+
+
+<script type="module">
+
+import {
+  initializeApp
+}
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged
+}
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+import {
+  getDatabase,
+  ref,
+  onValue,
+  remove,
+  update
+}
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
+
+
+/* =========================
+   FIREBASE CONFIG
+========================= */
+
+const firebaseConfig = {
+
+  apiKey:
+  "AIzaSyDGu444d8XJQ27cZzh3rIYH3RtaJk3W0SM",
+
+  authDomain:
+  "tabgmi.firebaseapp.com",
+
+  databaseURL:
+  "https://tabgmi-default-rtdb.firebaseio.com",
+
+  projectId:
+  "tabgmi",
+
+  storageBucket:
+  "tabgmi.firebasestorage.app",
+
+  messagingSenderId:
+  "152073037485",
+
+  appId:
+  "1:152073037485:web:2172a74775e097eacb0824",
+
+  measurementId:
+  "G-22MSXBXJZD"
+};
+
+
+const app =
+  initializeApp(firebaseConfig);
+
+const auth =
+  getAuth(app);
+
+const db =
+  getDatabase(app);
+
+
+let registrations = {};
+let confirmations = {};
+
+let registrationsLoaded = false;
+let confirmationsLoaded = false;
+
+
+/* =========================
+   LOGIN
+========================= */
+
+window.login = async function(){
+
+  const email =
+    document
+      .getElementById("email")
+      .value
+      .trim();
+
+  const password =
+    document
+      .getElementById("password")
+      .value;
+
+  const error =
+    document
+      .getElementById("loginError");
+
+  error.textContent = "";
+
+
+  if(!email || !password){
+
+    error.textContent =
+      "Enter email and password.";
+
+    return;
+  }
+
+
+  try{
+
+    await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    document
+      .getElementById("loginError")
+      .textContent =
+      "Invalid email or password.";
+
+  }
+
+};
+
+
+/* =========================
+   AUTH
+========================= */
+
+onAuthStateChanged(
+  auth,
+  user => {
+
+    if(user){
+
+      document
+        .getElementById("loginBox")
+        .style.display = "none";
+
+      document
+        .getElementById("dashboard")
+        .style.display = "block";
+
+      loadData();
+
+    }else{
+
+      document
+        .getElementById("loginBox")
+        .style.display = "block";
+
+      document
+        .getElementById("dashboard")
+        .style.display = "none";
+
+    }
+
+  }
+);
+
+
+/* =========================
+   LOAD REGISTRATIONS
+========================= */
+
+function loadData(){
+
+  onValue(
+    ref(db,"registrations"),
+    snapshot => {
+
+      registrations =
+        snapshot.val() || {};
+
+      registrationsLoaded = true;
+
+      render();
+
+    },
+    error => {
+
+      console.error(
+        "Registration error:",
+        error
+      );
+
+    }
+  );
+
+
+  onValue(
+    ref(db,"paymentConfirmations"),
+    snapshot => {
+
+      confirmations =
+        snapshot.val() || {};
+
+      confirmationsLoaded = true;
+
+      render();
+
+    },
+    error => {
+
+      console.error(
+        "Confirmation error:",
+        error
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================
+   FIND CONFIRMATION
+========================= */
+
+function getConfirmation(data){
+
+  const phone =
+    String(
+      data.phone || ""
+    )
+    .replace(/\D/g,"");
+
+
+  if(!phone){
+    return null;
+  }
+
+
+  let latest = null;
+
+
+  Object.entries(confirmations)
+    .forEach(
+      ([id,confirmation]) => {
+
+        const confirmationPhone =
+          String(
+            confirmation.whatsapp || ""
+          )
+          .replace(/\D/g,"");
+
+
+        if(
+          confirmationPhone &&
+          confirmationPhone === phone
+        ){
+
+          if(
+            !latest ||
+            String(
+              confirmation.submittedAt || ""
+            ) >
+            String(
+              latest.data.submittedAt || ""
+            )
+          ){
+
+            latest = {
+              id:id,
+              data:confirmation
+            };
+
+          }
+
+        }
+
+      }
+    );
+
+
+  return latest;
+
+}
+
+
+/* =========================
+   RENDER
+========================= */
+
+window.render = function(){
+
+  const list =
+    document
+      .getElementById("list");
+
+
+  const search =
+    document
+      .getElementById("search")
+      .value
+      .toLowerCase()
+      .trim();
+
+
+  const entries =
+    Object.entries(
+      registrations
+    );
+
+
+  let teamCount = 0;
+  let soloCount = 0;
+
+
+  entries.forEach(
+    ([id,data]) => {
+
+      if(
+        data.registrationType ===
+        "Team"
+      ){
+
+        teamCount++;
+
+      }
+
+      if(
+        data.registrationType ===
+        "Solo"
+      ){
+
+        soloCount++;
+
+      }
+
+    }
+  );
+
+
+  document
+    .getElementById("total")
+    .textContent =
+    entries.length;
+
+
+  document
+    .getElementById("teams")
+    .textContent =
+    teamCount;
+
+
+  document
+    .getElementById("solos")
+    .textContent =
+    soloCount;
+
+
+  const filtered =
+    entries.filter(
+      ([id,data]) => {
+
+        const confirmation =
+          getConfirmation(data);
+
+
+        const combined = JSON.stringify({
+          registration:data,
+          confirmation:
+            confirmation
+              ? confirmation.data
+              : null
+        });
+
+
+        return combined
+          .toLowerCase()
+          .includes(search);
+
+      }
+    );
+
+
+  if(filtered.length === 0){
+
+    list.innerHTML = `
+      <div class="empty">
+        ${
+          registrationsLoaded
+            ? "No registrations found."
+            : "Loading..."
+        }
+      </div>
+    `;
+
+    return;
+  }
+
+
+  list.innerHTML = "";
+
+
+  filtered
+    .slice()
+    .reverse()
+    .forEach(
+      ([id,data]) => {
+
+        const card =
+          document.createElement(
+            "div"
+          );
+
+        card.className =
+          "registration";
+
+
+        const confirmation =
+          getConfirmation(data);
+
+
+        let confirmationHTML =
+          "";
+
+
+        if(confirmation){
+
+          const c =
+            confirmation.data;
+
+
+          const status =
+            c.status ||
+            "Pending";
+
+
+          let statusClass =
+            "pending";
+
+
+          let statusText =
+            "⏳ PENDING CONFIRMATION";
+
+
+          if(
+            status === "Approved"
+          ){
+
+            statusClass =
+              "approved";
+
+            statusText =
+              "✅ APPROVED";
+
+          }
+
+
+          if(
+            status === "Rejected"
+          ){
+
+            statusClass =
+              "rejected";
+
+            statusText =
+              "❌ REJECTED";
+
+          }
+
+
+          confirmationHTML = `
+
+            <div class="confirmation">
+
+              <div class="confirmation-title">
+                💳 CONFIRMATION DETAILS
+              </div>
+
+
+              <div class="detail">
+
+                <b>WhatsApp:</b>
+                ${safe(c.whatsapp)}
+
+              </div>
+
+
+              <div class="detail">
+
+                <b>Test Reference:</b>
+                ${safe(
+                  c.testReference ||
+                  "-"
+                )}
+
+              </div>
+
+
+              <div class="detail">
+
+                <b>Submitted:</b>
+                ${date(c.submittedAt)}
+
+              </div>
+
+
+              <div
+                class="${statusClass}"
+                style="margin-top:12px;">
+
+                ${statusText}
+
+              </div>
+
+            </div>
+
+          `;
+
+        }else{
+
+          confirmationHTML = `
+
+            <div class="confirmation">
+
+              <div class="confirmation-title">
+                💳 CONFIRMATION DETAILS
+              </div>
+
+              <div class="pending">
+                ⏳ No confirmation submitted yet
+              </div>
+
+            </div>
+
+          `;
+
+        }
+
+
+        /* ======================
+           TEAM
+        ====================== */
+
+        if(
+          data.registrationType ===
+          "Team"
+        ){
+
+          card.innerHTML = `
+
+            <div class="regHeader">
+
+              <div class="teamName">
+                ${safe(data.teamName)}
+              </div>
+
+              <div class="badge">
+                TEAM
+              </div>
+
+            </div>
+
+
+            <div class="detail">
+              <b>Captain:</b>
+              ${safe(data.captainName)}
+            </div>
+
+
+            ${player(
+              "PLAYER 1",
+              data.player1
+            )}
+
+
+            ${player(
+              "PLAYER 2",
+              data.player2
+            )}
+
+
+            ${player(
+              "PLAYER 3",
+              data.player3
+            )}
+
+
+            ${player(
+              "PLAYER 4",
+              data.player4
+            )}
+
+
+            <div class="detail">
+              <b>Registration WhatsApp:</b>
+              ${safe(data.phone)}
+            </div>
+
+
+            <div class="detail">
+              <b>Registered:</b>
+              ${date(data.registeredAt)}
+            </div>
+
+
+            ${confirmationHTML}
+
+
+            ${buttons(id)}
+
+          `;
+
+        }else{
+
+          /* ======================
+             SOLO
+          ====================== */
+
+          card.innerHTML = `
+
+            <div class="regHeader">
+
+              <div class="teamName">
+                Solo Player
+              </div>
+
+              <div class="badge">
+                SOLO
+              </div>
+
+            </div>
+
+
+            ${player(
+              "SOLO PLAYER",
+              data.player
+            )}
+
+
+            <div class="detail">
+              <b>Registration WhatsApp:</b>
+              ${safe(data.phone)}
+            </div>
+
+
+            <div class="detail">
+              <b>Registered:</b>
+              ${date(data.registeredAt)}
+            </div>
+
+
+            ${confirmationHTML}
+
+
+            ${buttons(id)}
+
+          `;
+
+        }
+
+
+        list.appendChild(card);
+
+      }
+    );
+
+};
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+function buttons(id){
+
+  return `
+
+    <button
+      class="approve"
+      onclick="approveRegistration('${id}')">
+
+      ✅ APPROVE REGISTRATION
+
+    </button>
+
+
+    <button
+      class="reject"
+      onclick="rejectRegistration('${id}')">
+
+      ❌ REJECT REGISTRATION
+
+    </button>
+
+
+    <button
+      class="whatsapp"
+      onclick="sendWhatsApp('${id}')">
+
+      💬 SEND APPROVAL ON WHATSAPP
+
+    </button>
+
+
+    <button
+      class="rejectWhatsapp"
+      onclick="sendRejectWhatsApp('${id}')">
+
+      💬 SEND REJECTION ON WHATSAPP
+
+    </button>
+
+
+    <button
+      class="delete"
+      onclick="deleteReg('${id}')">
+
+      🗑 DELETE
+
+    </button>
+
+  `;
+
+}
+
+
+/* =========================
+   PLAYER
+========================= */
+
+function player(title,p){
+
+  if(!p){
+    return "";
+  }
+
+
+  return `
+
+    <div class="player">
+
+      <div class="playerTitle">
+        ${title}
+      </div>
+
+
+      <div>
+        <b>Name:</b>
+        ${safe(p.name)}
+      </div>
+
+
+      <div style="margin-top:7px">
+        <b>BGMI UID:</b>
+        ${safe(p.uid)}
+      </div>
+
+
+      <div style="margin-top:7px">
+        <b>IGN:</b>
+        ${safe(p.ign)}
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================
+   APPROVE
+========================= */
+
+window.approveRegistration =
+async function(id){
+
+  const registration =
+    registrations[id];
+
+
+  if(!registration){
+
+    alert(
+      "Registration not found."
+    );
+
+    return;
+  }
+
+
+  if(
+    !confirm(
+      "Approve this registration?"
+    )
+  ){
+
+    return;
+  }
+
+
+  try{
+
+    await update(
+      ref(
+        db,
+        "registrations/" + id
+      ),
+      {
+
+        status:
+          "Approved",
+
+        approvedAt:
+          new Date()
+            .toISOString()
+
+      }
+    );
+
+
+    const confirmation =
+      getConfirmation(
+        registration
+      );
+
+
+    if(confirmation){
+
+      await update(
+        ref(
+          db,
+          "paymentConfirmations/" +
+          confirmation.id
+        ),
+        {
+
+          status:
+            "Approved",
+
+          approvedAt:
+            new Date()
+              .toISOString()
+
+        }
+      );
+
+    }
+
+
+    alert(
+      "✅ Registration approved!"
+    );
+
+
+  }catch(error){
+
+    console.error(error);
+
+    alert(
+      "❌ Could not approve registration."
+    );
+
+  }
+
+};
+
+
+/* =========================
+   REJECT
+========================= */
+
+window.rejectRegistration =
+async function(id){
+
+  const registration =
+    registrations[id];
+
+
+  if(!registration){
+
+    alert(
+      "Registration not found."
+    );
+
+    return;
+  }
+
+
+  if(
+    !confirm(
+      "Reject this registration?"
+    )
+  ){
+
+    return;
+  }
+
+
+  try{
+
+    await update(
+      ref(
+        db,
+        "registrations/" + id
+      ),
+      {
+
+        status:
+          "Rejected",
+
+        rejectedAt:
+          new Date()
+            .toISOString()
+
+      }
+    );
+
+
+    const confirmation =
+      getConfirmation(
+        registration
+      );
+
+
+    if(confirmation){
+
+      await update(
+        ref(
+          db,
+          "paymentConfirmations/" +
+          confirmation.id
+        ),
+        {
+
+          status:
+            "Rejected",
+
+          rejectedAt:
+            new Date()
+              .toISOString()
+
+        }
+      );
+
+    }
+
+
+    alert(
+      "❌ Registration rejected!"
+    );
+
+
+  }catch(error){
+
+    console.error(error);
+
+    alert(
+      "❌ Could not reject registration."
+    );
+
+  }
+
+};
+
+
+/* =========================
+   APPROVAL WHATSAPP
+========================= */
+
+window.sendWhatsApp =
+function(id){
+
+  const data =
+    registrations[id];
+
+
+  if(!data){
+
+    alert(
+      "Registration not found."
+    );
+
+    return;
+  }
+
+
+  const confirmation =
+    getConfirmation(data);
+
+
+  let phone =
+    confirmation
+      ? confirmation.data.whatsapp
+      : data.phone;
+
+
+  phone =
+    String(phone || "")
+      .replace(/\D/g,"");
+
+
+  if(phone.length === 10){
+
+    phone =
+      "91" + phone;
+
+  }
+
+
+  if(phone.length < 12){
+
+    alert(
+      "Valid WhatsApp number not found."
+    );
+
+    return;
+  }
+
+
+  let name =
+    "Player";
+
+
+  let team =
+    "Solo";
+
+
+  if(
+    data.registrationType ===
+    "Team"
+  ){
+
+    name =
+      data.captainName ||
+      "Captain";
+
+    team =
+      data.teamName ||
+      "Team";
+
+  }else{
+
+    name =
+      data.player?.name ||
+      "Player";
+
+  }
+
+
+  const message =
+
+`🎉 TSBGMI ESPORTS — REGISTRATION APPROVED
+
+Hello ${name},
+
+Your registration for TSBGMI Esports Tournament has been approved successfully. ✅
+
+🎮 Team: ${team}
+👤 Captain/Player: ${name}
+
+🏆 Your registration is confirmed.
+
+Please stay connected to the official TSBGMI communication channel for match updates.
+
+🔐 Room ID & Password will be shared 15 minutes before the scheduled match.
+
+Good luck and play fair! 🔥🏆
+
+— TSBGMI Esports
+Instagram: @tsbgmiesports`;
+
+
+  const url =
+    "https://wa.me/" +
+    phone +
+    "?text=" +
+    encodeURIComponent(
+      message
+    );
+
+
+  window.open(
+    url,
+    "_blank"
+  );
+
+};
+
+
+/* =========================
+   REJECTION WHATSAPP
+========================= */
+
+window.sendRejectWhatsApp =
+function(id){
+
+  const data =
+    registrations[id];
+
+
+  if(!data){
+
+    alert(
+      "Registration not found."
+    );
+
+    return;
+  }
+
+
+  if(
+    data.status !==
+    "Rejected"
+  ){
+
+    alert(
+      "Please reject the registration first."
+    );
+
+    return;
+  }
+
+
+  const confirmation =
+    getConfirmation(data);
+
+
+  let phone =
+    confirmation
+      ? confirmation.data.whatsapp
+      : data.phone;
+
+
+  phone =
+    String(phone || "")
+      .replace(/\D/g,"");
+
+
+  if(phone.length === 10){
+
+    phone =
+      "91" + phone;
+
+  }
+
+
+  if(phone.length < 12){
+
+    alert(
+      "Valid WhatsApp number not found."
+    );
+
+    return;
+  }
+
+
+  let name =
+    "Player";
+
+
+  let team =
+    "Solo";
+
+
+  if(
+    data.registrationType ===
+    "Team"
+  ){
+
+    name =
+      data.captainName ||
+      "Captain";
+
+    team =
+      data.teamName ||
+      "Team";
+
+  }else{
+
+    name =
+      data.player?.name ||
+      "Player";
+
+  }
+
+
+  const message =
+
+`TSBGMI ESPORTS — REGISTRATION UPDATE
+
+Hello ${name},
+
+Unfortunately, your registration for the TSBGMI Esports Tournament has been rejected. ❌
+
+🎮 Team: ${team}
+👤 Captain/Player: ${name}
+
+Please contact the tournament organizers if you believe this was a mistake.
+
+— TSBGMI Esports
+Instagram: @tsbgmiesports`;
+
+
+  const url =
+    "https://wa.me/" +
+    phone +
+    "?text=" +
+    encodeURIComponent(
+      message
+    );
+
+
+  window.open(
+    url,
+    "_blank"
+  );
+
+};
+
+
+/* =========================
+   DELETE
+========================= */
+
+window.deleteReg =
+async function(id){
+
+  if(
+    !confirm(
+      "Delete this registration?"
+    )
+  ){
+
+    return;
+  }
+
+
+  try{
+
+    await remove(
+      ref(
+        db,
+        "registrations/" + id
+      )
+    );
+
+
+    alert(
+      "🗑 Registration deleted."
+    );
+
+
+  }catch(error){
+
+    console.error(error);
+
+    alert(
+      "❌ Delete failed."
+    );
+
+  }
+
+};
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+window.logout =
+async function(){
+
+  try{
+
+    await signOut(auth);
+
+  }catch(error){
+
+    console.error(error);
+
+  }
+
+};
+
+
+/* =========================
+   DATE
+========================= */
+
+function date(value){
+
+  if(!value){
+    return "-";
+  }
+
+
+  const d =
+    new Date(value);
+
+
+  if(
+    Number.isNaN(
+      d.getTime()
+    )
+  ){
+
+    return "-";
+
+  }
+
+
+  return d.toLocaleString();
+
+}
+
+
+/* =========================
+   SAFE HTML
+========================= */
+
+function safe(value){
+
+  if(
+    value === undefined ||
+    value === null
+  ){
+
+    return "-";
+
+  }
+
+
+  return String(value)
+
+    .replaceAll(
+      "&",
+      "&amp;"
+    )
+
+    .replaceAll(
+      "<",
+      "&lt;"
+    )
+
+    .replaceAll(
+      ">",
+      "&gt;"
+    )
+
+    .replaceAll(
+      '"',
+      "&quot;"
+    )
+
+    .replaceAll(
+      "'",
+      "&#039;"
+    );
+
+}
+
+</script>
+
+</body>
+</html>
